@@ -1,0 +1,15 @@
+.container {
+  text-align: center;
+}
+
+.img {
+  display: block;
+  max-width: 750px;
+  max-height: 550px;
+  margin: 0 auto;
+}
+
+.text {
+  max-width: 600px;
+  text-align: center;
+}
