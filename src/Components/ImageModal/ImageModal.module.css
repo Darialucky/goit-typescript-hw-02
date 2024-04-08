@@ -1,10 +1,21 @@
-/* ImageGallery.module.css */
-/* .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-} */
+.modal-content {
+  max-width: 60%;
+  max-height: 60%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px;
+}
 
+.img {
+  max-width: 100%;
+  height: auto;
+}
+
+.text {
+  margin-top: 16px;
+}
 /* .container {
   position: fixed;
   top: 0;
@@ -17,21 +28,3 @@
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999;
 } */
-
-.modal-content {
-  max-width: 80%;
-  max-height: 80%;
-  overflow: auto;
-  background-color: white;
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.img {
-  max-width: 100%;
-  height: auto;
-}
-
-.text {
-  margin-top: 16px;
-}
