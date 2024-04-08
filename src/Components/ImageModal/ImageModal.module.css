@@ -1,15 +1,37 @@
-.container {
-  text-align: center;
+/* ImageGallery.module.css */
+/* .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+} */
+
+/* .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+} */
+
+.modal-content {
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
 }
 
 .img {
-  display: block;
-  max-width: 750px;
-  max-height: 550px;
-  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .text {
-  max-width: 600px;
-  text-align: center;
+  margin-top: 16px;
 }
