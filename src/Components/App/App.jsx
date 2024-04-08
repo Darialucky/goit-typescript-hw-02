@@ -7,6 +7,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
 import { fetchImages } from "../../api";
+import "./App.css";
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -14,6 +15,12 @@ const App = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [alt, setAlt] = useState("");
+  const [url, setUrl] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +28,9 @@ const App = () => {
       try {
         const data = await fetchImages(page, query);
         setImages((prevImages) => [...prevImages, ...data.results]);
+        if (data.results.length === 0) {
+          setHasMore(false);
+        }
       } catch (error) {
         setError(error);
         toast.error("Whoops, something went wrong!");
@@ -36,18 +46,12 @@ const App = () => {
     setImages([]);
     setPage(1);
     setError(false);
+    setHasMore(true);
   };
 
   const onLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
   };
-
-  const [isVisible, setIsVisible] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [alt, setAlt] = useState("");
-  const [url, setUrl] = useState("");
-  const [description, setDescription] = useState("");
 
   const openModal = (obj) => {
     setShowModal(true);
@@ -63,27 +67,35 @@ const App = () => {
     setDescription("");
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Escape") {
+      closeModal();
+    }
+  };
+
   return (
     <>
       <Toaster position="top-right" reverseOrder={false} />
       <SearchBar onSearch={onSubmit} />
-      {error && <ErrorMessage />}
-      {!images.length && isEmpty && <p>Let's begin search...</p>}
-      {images.length > 0 && (
-        <ImageGallery images={images} openModal={openModal} />
-      )}
-      {isVisible && !loading && (
-        <LoadMoreBtn onClick={onLoadMore} loading={loading} />
-      )}
-      {loading && <Loader />}
-      {!images.length && !isEmpty && <p>Sorry. There are no images...</p>}
-      <ImageModal
-        url={url}
-        alt={alt}
-        description={description}
-        modalIsOpen={showModal}
-        closeModal={closeModal}
-      />
+      <div className="image-container">
+        {images.length > 0 && (
+          <ImageGallery images={images} openModal={openModal} />
+        )}
+        {hasMore &&
+          images.length >= 10 &&
+          images.length % 10 === 0 &&
+          !loading && <LoadMoreBtn onClick={onLoadMore} loading={loading} />}
+        {loading && <Loader />}
+        {!images.length && !loading && <p>Sorry. There are no images...</p>}
+        {showModal && (
+          <ImageModal
+            url={url}
+            alt={alt}
+            description={description}
+            closeModal={closeModal}
+          />
+        )}
+      </div>
     </>
   );
 };

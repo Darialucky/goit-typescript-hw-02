@@ -1,4 +1,4 @@
-.btn {
+.button {
   border: 1px solid black;
   border-radius: 16px;
   background-color: transparent;
@@ -6,7 +6,7 @@
   outline: none;
 }
 
-.btn:hover {
+.button:hover {
   border-color: green;
   box-shadow: 0 4px 6px aquamarine;
   color: greenyellow;
