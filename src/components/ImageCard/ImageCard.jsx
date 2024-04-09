@@ -13,6 +13,7 @@ const ImageCard = ({ image, openModal }) => {
       <p className={style.text}>
         <BiSolidLike />
         {image.likes}
+        {image.location}
       </p>
     </div>
   );

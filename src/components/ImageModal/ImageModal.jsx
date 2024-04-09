@@ -41,7 +41,7 @@ const ImageModal = ({
           <div className={css.contentWrap}>
             <p className={css.text}>Author: {user.name}</p>
             <p className={css.text}>Location: {user.location}</p>
-            <p className={css.text}>Likes: {likes.total}</p>
+            <p className={css.text}>Likes: {likes}</p>
           </div>
         </div>
       </Modal>
