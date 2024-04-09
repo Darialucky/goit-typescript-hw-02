@@ -1,5 +1,5 @@
 import style from "./ImageCard.module.css";
-import { AiFillLike } from "react-icons/ai";
+import { BiSolidLike } from "react-icons/bi";
 
 const ImageCard = ({ image, openModal }) => {
   return (
@@ -11,7 +11,7 @@ const ImageCard = ({ image, openModal }) => {
         onClick={() => openModal(image)}
       />
       <p className={style.text}>
-        <AiFillLike />
+        <BiSolidLike />
         {image.likes}
       </p>
     </div>

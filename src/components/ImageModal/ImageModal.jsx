@@ -1,8 +1,10 @@
-import { useEffect } from "react";
 import Modal from "react-modal";
-import style from "./ImageModal.module.css";
+import css from "./ImageModal.module.css";
 
 const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+  },
   content: {
     top: "50%",
     left: "50%",
@@ -10,50 +12,40 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    border: "none",
-  },
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
   },
 };
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ url, alt, description, modalIsOpen, closeModal }) => {
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        closeModal();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [closeModal]);
-
-  const handleClickOutside = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
+export function ImageModal({
+  url,
+  alt,
+  description,
+  modalIsOpen,
+  closeModal,
+  likes,
+  user,
+  userLoc,
+}) {
   return (
-    <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel="Image Modal"
-      className={style.modal}
-      overlayClassName={style.overlay}
-      onClick={handleClickOutside}
-    >
-      <img src={url} alt={alt} className={style.img} />
-      <p className={style.text}>{description}</p>
-    </Modal>
+    <div className={css.modalOverlay}>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <img className={css.img} src={url} alt={alt} />
+        <div className={css.wrapper}>
+          <p>{description}</p>
+          <div className={css.contentWrap}>
+            <p className={css.text}>Author: {user}</p>
+            <p className={css.text}>Location: {userLoc}</p>
+            <p className={css.text}>Likes: {likes}</p>
+          </div>
+        </div>
+      </Modal>
+    </div>
   );
-};
-
+}
 export default ImageModal;
