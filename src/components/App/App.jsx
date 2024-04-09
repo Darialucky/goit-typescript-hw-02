@@ -21,6 +21,9 @@ function App() {
   const [alt, setAlt] = useState("");
   const [description, setDescription] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
+  const [userLoc, setUserLoc] = useState("");
+  const [likes, setLikes] = useState("");
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     if (!query) return;
@@ -59,6 +62,9 @@ function App() {
     setAlt(obj.alt_description);
     setUrl(obj.urls.regular);
     setDescription(obj.description);
+    setLikes(obj.likes);
+    setUser(obj.user);
+    setUserLoc(obj.userLoc);
   };
 
   const closeModal = () => {
@@ -66,6 +72,9 @@ function App() {
     setAlt("");
     setUrl("");
     setDescription("");
+    setLikes("");
+    setUser("");
+    setUserLoc("");
   };
 
   return (
@@ -85,8 +94,11 @@ function App() {
       <ImageModal
         url={url}
         alt={alt}
-        description={description}
+        likes={likes}
+        user={user}
+        userLoc={userLoc}
         modalIsOpen={showModal}
+        description={description}
         closeModal={closeModal}
       />
     </>

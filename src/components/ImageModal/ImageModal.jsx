@@ -12,12 +12,13 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    boxSizing: "border-box",
   },
 };
 
 Modal.setAppElement("#root");
 
-export function ImageModal({
+const ImageModal = ({
   url,
   alt,
   description,
@@ -25,8 +26,7 @@ export function ImageModal({
   closeModal,
   likes,
   user,
-  userLoc,
-}) {
+}) => {
   return (
     <div className={css.modalOverlay}>
       <Modal
@@ -39,13 +39,14 @@ export function ImageModal({
         <div className={css.wrapper}>
           <p>{description}</p>
           <div className={css.contentWrap}>
-            <p className={css.text}>Author: {user}</p>
-            <p className={css.text}>Location: {userLoc}</p>
-            <p className={css.text}>Likes: {likes}</p>
+            <p className={css.text}>Author: {user.name}</p>
+            <p className={css.text}>Location: {user.location}</p>
+            <p className={css.text}>Likes: {likes.total}</p>
           </div>
         </div>
       </Modal>
     </div>
   );
-}
+};
+
 export default ImageModal;
