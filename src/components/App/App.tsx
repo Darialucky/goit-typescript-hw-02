@@ -8,17 +8,7 @@ import ImageModal from "../ImageModal/ImageModal";
 import toast, { Toaster } from "react-hot-toast";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
-
-interface Image {
-  alt_description: string;
-  urls: {
-    regular: string;
-  };
-  description: string;
-  likes: string;
-  user: string;
-  userLoc: string;
-}
+import { Image } from "../App/App.types";
 
 interface FetchDataInterface {
   total_pages: number;
@@ -50,7 +40,7 @@ function App() {
         const data: FetchDataInterface = await fetchImages(page, query);
         setImages((prevImages) => [...prevImages, ...data.results]);
         setIsVisible(page < data.total_pages);
-      } catch (error) {
+      } catch (error: any) {
         setError(true);
         toast.error("Whoops, something went wrong!");
       } finally {
@@ -78,7 +68,7 @@ function App() {
     setAlt(obj.alt_description);
     setUrl(obj.urls.regular);
     setDescription(obj.description);
-    setLikes(obj.likes);
+    setLikes(`${obj.likes}`);
     setUser(obj.user);
     setUserLoc(obj.userLoc);
   };

@@ -1,7 +1,7 @@
-import Modal from "react-modal";
+import Modal, { Styles } from "react-modal";
 import css from "./ImageModal.module.css";
 
-const customStyles = {
+const customStyles: Styles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.9)",
   },
@@ -24,7 +24,8 @@ interface ModalProps {
   url: string;
   modalIsOpen: boolean;
   likes: string;
-  user: { name: string; location: string };
+  user: { name?: string; location?: string };
+  userLoc: string;
   closeModal: () => void;
 }
 

@@ -9,4 +9,6 @@ export interface Image {
     regular: string;
   };
   location?: string;
+  user: string;
+  userLoc: string;
 }
