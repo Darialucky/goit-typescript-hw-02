@@ -25,7 +25,6 @@ interface ModalProps {
   modalIsOpen: boolean;
   likes: string;
   user: { name?: string; location?: string };
-  userLoc: string;
   closeModal: () => void;
 }
 
@@ -50,8 +49,8 @@ const ImageModal: React.FC<ModalProps> = ({
         <div className={css.wrapper}>
           <p>{description}</p>
           <div className={css.contentWrap}>
-            <p className={css.text}>Author: {user?.name}</p>
-            <p className={css.text}>Location: {user?.location}</p>
+            <p className={css.text}>Author: {user.name}</p>
+            <p className={css.text}>Location: {user.location}</p>
             <p className={css.text}>Likes: {likes}</p>
           </div>
         </div>

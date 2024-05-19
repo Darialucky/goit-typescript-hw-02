@@ -27,9 +27,11 @@ function App() {
   const [alt, setAlt] = useState("");
   const [description, setDescription] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
-  const [userLoc, setUserLoc] = useState("");
+  const [user, setUser] = useState<{ name: string; location: string }>({
+    name: "",
+    location: "",
+  });
   const [likes, setLikes] = useState("");
-  const [user, setUser] = useState("");
 
   useEffect(() => {
     if (!query) return;
@@ -67,10 +69,9 @@ function App() {
     setShowModal(true);
     setAlt(obj.alt_description);
     setUrl(obj.urls.regular);
-    setDescription(obj.description);
+    setDescription(obj.description || "");
     setLikes(`${obj.likes}`);
-    setUser(obj.user);
-    setUserLoc(obj.userLoc);
+    setUser({ name: user.name, location: user.location });
   };
 
   const closeModal = (): void => {
@@ -79,8 +80,7 @@ function App() {
     setUrl("");
     setDescription("");
     setLikes("");
-    setUser("");
-    setUserLoc("");
+    setUser({ name: "", location: "" });
   };
 
   return (
@@ -101,8 +101,7 @@ function App() {
         url={url}
         alt={alt}
         likes={likes}
-        user={{ name: user, location: userLoc }}
-        userLoc={userLoc}
+        user={user}
         modalIsOpen={showModal}
         description={description}
         closeModal={closeModal}
