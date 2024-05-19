@@ -1,6 +1,6 @@
-import style from "./ImageCard.module.css";
+import css from "./ImageCard.module.css";
 import { BiSolidLike } from "react-icons/bi";
-import { Image } from "../../types";
+import { Image } from "../App/App.types";
 
 interface ImageProps {
   image: Image;
@@ -9,14 +9,14 @@ interface ImageProps {
 
 const ImageCard: React.FC<ImageProps> = ({ image, openModal }) => {
   return (
-    <div className={style.card} style={{ borderColor: image.color }}>
+    <div className={css.card} style={{ borderColor: image.color }}>
       <img
         src={image.urls.small}
         alt={image.alt_description}
-        className={style.img}
+        className={css.img}
         onClick={() => openModal(image)}
       />
-      <p className={style.text}>
+      <p className={css.text}>
         <BiSolidLike />
         {image.likes}
         {image.location}

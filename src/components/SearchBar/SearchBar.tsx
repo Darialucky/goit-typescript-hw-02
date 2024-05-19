@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { FiSearch } from "react-icons/fi";
 import toast from "react-hot-toast";
-import style from "./SearchBar.module.css";
+import css from "./SearchBar.module.css";
 
 interface SearchBarProps {
   onSearch: (value: string) => void;
@@ -28,10 +28,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     setQuery("");
   };
   return (
-    <header className={style.header}>
-      <form className={style.form} onSubmit={handleSubmit}>
+    <header className={css.header}>
+      <form className={css.form} onSubmit={handleSubmit}>
         <input
-          className={style.input}
+          className={css.input}
           type="text"
           value={query}
           onChange={handleChange}
@@ -40,7 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           placeholder="Search images and photos"
           name="query"
         />
-        <button className={style.button} type="submit">
+        <button className={css.button} type="submit">
           <FiSearch />
         </button>
       </form>
