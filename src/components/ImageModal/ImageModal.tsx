@@ -18,7 +18,17 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({
+interface ModalProps {
+  alt: string;
+  description: string;
+  url: string;
+  modalIsOpen: boolean;
+  likes: string;
+  user: { name: string; location: string };
+  closeModal: () => void;
+}
+
+const ImageModal: React.FC<ModalProps> = ({
   url,
   alt,
   description,

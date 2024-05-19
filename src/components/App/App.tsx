@@ -9,9 +9,25 @@ import toast, { Toaster } from "react-hot-toast";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
 
+interface Image {
+  alt_description: string;
+  urls: {
+    regular: string;
+  };
+  description: string;
+  likes: string;
+  user: string;
+  userLoc: string;
+}
+
+interface FetchDataInterface {
+  total_pages: number;
+  results: Image[];
+}
+
 function App() {
   const [query, setQuery] = useState("");
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<Image[]>([]);
   const [page, setPage] = useState(1);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -27,15 +43,15 @@ function App() {
 
   useEffect(() => {
     if (!query) return;
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       try {
         setError(false);
         setLoading(true);
-        const data = await fetchImages(page, query);
+        const data: FetchDataInterface = await fetchImages(page, query);
         setImages((prevImages) => [...prevImages, ...data.results]);
         setIsVisible(page < data.total_pages);
       } catch (error) {
-        setError(error);
+        setError(true);
         toast.error("Whoops, something went wrong!");
       } finally {
         setLoading(false);
@@ -44,7 +60,7 @@ function App() {
     fetchData();
   }, [page, query]);
 
-  const onHandleSubmit = (value) => {
+  const onHandleSubmit = (value: string): void => {
     setQuery(value);
     setImages([]);
     setPage(1);
@@ -57,7 +73,7 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = (obj) => {
+  const openModal = (obj: Image): void => {
     setShowModal(true);
     setAlt(obj.alt_description);
     setUrl(obj.urls.regular);
@@ -67,7 +83,7 @@ function App() {
     setUserLoc(obj.userLoc);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setShowModal(false);
     setAlt("");
     setUrl("");
@@ -82,7 +98,7 @@ function App() {
       <Toaster position="top-right" reverseOrder={false} />
       <SearchBar onSearch={onHandleSubmit} />
       {error && <ErrorMessage />}
-      {!images.length && isEmpty && <p>Let`s begin search...</p>}
+      {!images.length && isEmpty && <p>Let's begin search...</p>}
       {images.length > 0 && (
         <ImageGallery images={images} openModal={openModal} />
       )}

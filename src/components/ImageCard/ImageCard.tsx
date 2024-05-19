@@ -1,7 +1,13 @@
 import style from "./ImageCard.module.css";
 import { BiSolidLike } from "react-icons/bi";
+import { Image } from "../../types";
 
-const ImageCard = ({ image, openModal }) => {
+interface ImageProps {
+  image: Image;
+  openModal: (obj: Image) => void;
+}
+
+const ImageCard: React.FC<ImageProps> = ({ image, openModal }) => {
   return (
     <div className={style.card} style={{ borderColor: image.color }}>
       <img
