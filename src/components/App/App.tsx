@@ -101,7 +101,7 @@ function App() {
         url={url}
         alt={alt}
         likes={likes}
-        user={user}
+        user={{ name: user, location: userLoc }}
         userLoc={userLoc}
         modalIsOpen={showModal}
         description={description}
