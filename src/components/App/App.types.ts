@@ -9,6 +9,6 @@ export interface Image {
     regular: string;
   };
   location?: string;
-  user: string;
+  user: { name?: string; location?: string };
   userLoc: string;
 }

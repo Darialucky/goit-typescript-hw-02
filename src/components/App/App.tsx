@@ -71,7 +71,17 @@ function App() {
     setUrl(obj.urls.regular);
     setDescription(obj.description || "");
     setLikes(`${obj.likes}`);
-    setUser({ name: user.name, location: user.location });
+    if (typeof obj.user === "object") {
+      setUser({
+        name: obj.user?.name || "Unknown",
+        location: obj.user?.location || "Unknown",
+      });
+    } else {
+      setUser({
+        name: "Unknown",
+        location: "Unknown",
+      });
+    }
   };
 
   const closeModal = (): void => {

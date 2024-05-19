@@ -37,6 +37,9 @@ const ImageModal: React.FC<ModalProps> = ({
   likes,
   user,
 }) => {
+  const authorName = user?.name || "Unknown";
+  const authorLocation = user?.location || "Unknown";
+
   return (
     <div className={css.modalOverlay}>
       <Modal
@@ -49,8 +52,8 @@ const ImageModal: React.FC<ModalProps> = ({
         <div className={css.wrapper}>
           <p>{description}</p>
           <div className={css.contentWrap}>
-            <p className={css.text}>Author: {user.name}</p>
-            <p className={css.text}>Location: {user.location}</p>
+            <p className={css.text}>Author: {authorName}</p>
+            <p className={css.text}>Location: {authorLocation}</p>
             <p className={css.text}>Likes: {likes}</p>
           </div>
         </div>
